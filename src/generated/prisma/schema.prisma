@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Word {
+  id         Int      @id @default(autoincrement())
+  word       String   @unique
+  hint       String?
+  difficulty String   @default("medium")
+  createdAt  DateTime @default(now())
+
+  dailyChallenges DailyChallenge[]
+}
+
+model Player {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+
+  dailyEntries DailyEntry[]
+  arcadeScores ArcadeScore[]
+}
+
+model DailyChallenge {
+  id     Int    @id @default(autoincrement())
+  date   String @unique
+  wordId Int
+  word   Word   @relation(fields: [wordId], references: [id])
+
+  entries DailyEntry[]
+}
+
+model DailyEntry {
+  id           Int      @id @default(autoincrement())
+  playerId     Int
+  challengeId  Int
+  won          Boolean  @default(false)
+  firstTry     Boolean  @default(false)
+  attemptsUsed Int      @default(0)
+  streak       Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  player    Player         @relation(fields: [playerId], references: [id])
+  challenge DailyChallenge @relation(fields: [challengeId], references: [id])
+
+  @@unique([playerId, challengeId])
+}
+
+model ArcadeScore {
+  id         Int      @id @default(autoincrement())
+  playerId   Int
+  points     Int
+  difficulty String
+  createdAt  DateTime @default(now())
+
+  player Player @relation(fields: [playerId], references: [id])
+}
