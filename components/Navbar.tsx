@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { CalendarDays, Gamepad2, Trophy } from "lucide-react";
 
 const links = [
-  { href: "/",           label: "Daily",     Icon: CalendarDays },
-  { href: "/practice",  label: "Practice",  Icon: Gamepad2 },
-  { href: "/leaderboard", label: "Scores",  Icon: Trophy },
+  { href: "/",             label: "Daily",    Icon: CalendarDays },
+  { href: "/practice",    label: "Practice", Icon: Gamepad2 },
+  { href: "/leaderboard", label: "Scores",   Icon: Trophy },
 ];
 
 export default function Navbar() {
@@ -19,10 +20,10 @@ export default function Navbar() {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        background: "rgba(253,244,238,0.85)",
-        backdropFilter: "blur(12px)",
+        background: "rgba(253,244,238,0.9)",
+        backdropFilter: "blur(14px)",
         borderBottom: "1.5px solid var(--border)",
-        padding: "0 1.5rem",
+        padding: "0 1.25rem",
       }}
     >
       <div
@@ -36,17 +37,17 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <Link
-          href="/"
-          style={{
+        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}>
+          <Image src="/logo.png" alt="Spelldle logo" width={32} height={32} style={{ objectFit: "contain" }} priority />
+          <span style={{
             fontFamily: "'Fredoka', cursive",
             fontWeight: 700,
-            fontSize: "1.15rem",
-            color: "var(--accent)",
+            fontSize: "1.1rem",
+            color: "#1a3a6e",
             letterSpacing: "-0.01em",
-          }}
-        >
-          spell<span style={{ color: "var(--text-2)" }}>.it</span>
+          }}>
+            Spelldle
+          </span>
         </Link>
 
         {/* Nav links */}
@@ -61,17 +62,18 @@ export default function Navbar() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "6px",
-                  padding: "6px 14px",
+                  gap: "5px",
+                  padding: "6px 12px",
                   borderRadius: "var(--radius-xl)",
-                  fontSize: "0.875rem",
+                  fontSize: "0.85rem",
                   fontWeight: active ? 700 : 600,
                   color: active ? "var(--accent)" : "var(--text-2)",
                   background: active ? "rgba(240,98,146,0.1)" : "transparent",
                   transition: "all 0.15s ease",
+                  textDecoration: "none",
                 }}
               >
-                <Icon size={15} strokeWidth={active ? 2.5 : 2} />
+                <Icon size={14} strokeWidth={active ? 2.5 : 2} />
                 {label}
               </Link>
             );

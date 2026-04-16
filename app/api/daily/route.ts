@@ -2,27 +2,32 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 function todayStr() {
-  return new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+  return new Date().toISOString().slice(0, 10);
 }
 
-// GET /api/daily?playerId=X  →  { challenge, entry | null }
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const playerId = parseInt(searchParams.get("playerId") || "");
 
   const date = todayStr();
 
-  // Get or create today's challenge
   let challenge = await prisma.dailyChallenge.findUnique({
     where: { date },
     include: { word: true },
   });
 
   if (!challenge) {
-    const count = await prisma.word.count();
-    if (count === 0) return NextResponse.json({ error: "No words" }, { status: 404 });
-    const skip = Math.floor(Math.random() * count);
-    const word = await prisma.word.findFirst({ skip });
+    // Auto-pick: prefer hard words
+    const hardCount = await prisma.word.count({ where: { difficulty: "hard" } });
+    let word = null;
+    if (hardCount > 0) {
+      const skip = Math.floor(Math.random() * hardCount);
+      word = await prisma.word.findFirst({ where: { difficulty: "hard" }, skip });
+    } else {
+      const count = await prisma.word.count();
+      if (count === 0) return NextResponse.json({ error: "No words in database" }, { status: 404 });
+      word = await prisma.word.findFirst({ skip: Math.floor(Math.random() * count) });
+    }
     if (!word) return NextResponse.json({ error: "No words" }, { status: 404 });
 
     challenge = await prisma.dailyChallenge.create({
@@ -31,7 +36,6 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  // Find existing entry for this player
   let entry = null;
   if (!isNaN(playerId)) {
     entry = await prisma.dailyEntry.findUnique({
@@ -53,7 +57,6 @@ export async function GET(req: NextRequest) {
   });
 }
 
-// POST /api/daily  →  submit a daily entry
 export async function POST(req: NextRequest) {
   const { playerId, challengeId, won, firstTry, attemptsUsed } = await req.json();
 
@@ -61,7 +64,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
-  // Calculate streak
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   const yesterdayStr = yesterday.toISOString().slice(0, 10);

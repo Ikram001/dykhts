@@ -2,8 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Do You Know How To Spell?",
-  description: "A cute spelling game. Listen, guess, and spell!",
+  title: "Spelldle — Do You Know How To Spell?",
+  description: "A daily spelling challenge. Listen to the word, spell it out!",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/icon-192.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
