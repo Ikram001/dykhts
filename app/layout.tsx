@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Spelldle — Do You Know How To Spell?",
-  description: "A daily spelling challenge. Listen to the word, spell it out!",
+  description: "A daily spelling challenge. Listen to the word, spell it out, beat the leaderboard.",
   icons: {
     icon: [
       { url: "/favicon.ico" },

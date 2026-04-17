@@ -1,9 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { CalendarDays, Gamepad2, Trophy } from "lucide-react";
+import { CalendarDays, Gamepad2, Trophy, X, Menu } from "lucide-react";
 
 const links = [
   { href: "/",             label: "Daily",    Icon: CalendarDays },
@@ -13,73 +14,101 @@ const links = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  // Close menu on route change
+  useEffect(() => { setOpen(false); }, [pathname]);
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
   return (
-    <nav
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        background: "rgba(253,244,238,0.9)",
-        backdropFilter: "blur(14px)",
-        borderBottom: "1.5px solid var(--border)",
-        padding: "0 1.25rem",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 720,
-          margin: "0 auto",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: 56,
-        }}
-      >
-        {/* Logo */}
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}>
-          <Image src="/logo.png" alt="Spelldle logo" width={32} height={32} style={{ objectFit: "contain" }} priority />
-          <span style={{
-            fontFamily: "'Fredoka', cursive",
-            fontWeight: 700,
-            fontSize: "1.1rem",
-            color: "#1a3a6e",
-            letterSpacing: "-0.01em",
-          }}>
-            Spelldle
-          </span>
-        </Link>
+    <>
+      <nav style={{
+        position: "sticky", top: 0, zIndex: 50,
+        background: "rgba(19,19,19,0.95)",
+        backdropFilter: "blur(16px)",
+        borderBottom: "1px solid var(--border)",
+      }}>
+        <div style={{ maxWidth: 680, margin: "0 auto", padding: "0 1rem", display: "flex", alignItems: "center", justifyContent: "space-between", height: 52 }}>
+          {/* Logo */}
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <Image src="/logo.png" alt="Spelldle" width={26} height={26} style={{ objectFit: "contain" }} priority />
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: "0.95rem", color: "var(--text)", letterSpacing: "-0.02em" }}>
+              Spelldle
+            </span>
+          </Link>
 
-        {/* Nav links */}
-        <div style={{ display: "flex", gap: "4px" }}>
-          {links.map(({ href, label, Icon }) => {
-            const active = pathname === href;
-            return (
-              <Link
-                key={href}
-                href={href}
-                aria-current={active ? "page" : undefined}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "5px",
-                  padding: "6px 12px",
-                  borderRadius: "var(--radius-xl)",
-                  fontSize: "0.85rem",
-                  fontWeight: active ? 700 : 600,
-                  color: active ? "var(--accent)" : "var(--text-2)",
-                  background: active ? "rgba(240,98,146,0.1)" : "transparent",
-                  transition: "all 0.15s ease",
-                  textDecoration: "none",
-                }}
-              >
-                <Icon size={14} strokeWidth={active ? 2.5 : 2} />
-                {label}
-              </Link>
-            );
-          })}
+          {/* Desktop nav */}
+          <div style={{ display: "flex", gap: "2px" }} className="desktop-nav">
+            {links.map(({ href, label, Icon }) => {
+              const active = pathname === href;
+              return (
+                <Link key={href} href={href} aria-current={active ? "page" : undefined}
+                  style={{ display: "flex", alignItems: "center", gap: "5px", padding: "6px 12px", borderRadius: "var(--radius-md)", fontSize: "0.82rem", fontWeight: 500, color: active ? "var(--primary)" : "var(--text-2)", background: active ? "var(--primary-dim)" : "transparent", transition: "all 0.15s ease" }}>
+                  <Icon size={13} strokeWidth={active ? 2.5 : 2} />
+                  {label}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Hamburger button — mobile only */}
+          <button
+            onClick={() => setOpen(o => !o)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="hamburger-btn"
+            style={{ display: "none", alignItems: "center", justifyContent: "center", width: 36, height: 36, background: "transparent", border: "1px solid var(--border)", borderRadius: "var(--radius-sm)", color: "var(--text-2)", cursor: "pointer" }}>
+            {open ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
+      </nav>
+
+      {/* Mobile drawer overlay */}
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          style={{ position: "fixed", inset: 0, zIndex: 48, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(2px)" }}
+        />
+      )}
+
+      {/* Mobile drawer */}
+      <div
+        aria-hidden={!open}
+        style={{
+          position: "fixed", top: 52, right: 0, bottom: 0, zIndex: 49,
+          width: "min(280px, 80vw)",
+          background: "var(--surface)",
+          borderLeft: "1px solid var(--border)",
+          padding: "1.5rem 1rem",
+          transform: open ? "translateX(0)" : "translateX(100%)",
+          transition: "transform 0.22s cubic-bezier(0.4,0,0.2,1)",
+          display: "flex", flexDirection: "column", gap: "4px",
+        }}
+        className="mobile-drawer"
+      >
+        {links.map(({ href, label, Icon }) => {
+          const active = pathname === href;
+          return (
+            <Link key={href} href={href}
+              style={{ display: "flex", alignItems: "center", gap: "12px", padding: "12px 14px", borderRadius: "var(--radius-md)", color: active ? "var(--primary)" : "var(--text-2)", background: active ? "var(--primary-dim)" : "transparent", fontWeight: active ? 600 : 500, fontSize: "0.95rem", transition: "all 0.15s" }}>
+              <Icon size={16} strokeWidth={active ? 2.5 : 2} />
+              {label}
+            </Link>
+          );
+        })}
       </div>
-    </nav>
+
+      <style>{`
+        @media (max-width: 520px) {
+          .desktop-nav { display: none !important; }
+          .hamburger-btn { display: flex !important; }
+        }
+      `}</style>
+    </>
   );
 }

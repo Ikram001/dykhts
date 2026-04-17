@@ -119,7 +119,7 @@ export default function AdminPage() {
         <form onSubmit={handleLogin} style={{ background: "var(--surface)", border: "1.5px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "2.5rem", width: "100%", maxWidth: 380, boxShadow: "var(--shadow-md)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "1.75rem" }}>
             <div style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(26,58,110,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Lock size={18} color="#1a3a6e" />
+              <Lock size={18} color="var(--primary-container)" />
             </div>
             <div>
               <h1 style={{ fontSize: "1.3rem", color: "var(--text)" }}>Admin Access</h1>
@@ -139,7 +139,7 @@ export default function AdminPage() {
             </p>
           )}
 
-          <button type="submit" style={{ width: "100%", marginTop: "1.5rem", padding: "12px", background: "#1a3a6e", border: "none", borderRadius: "var(--radius-md)", color: "white", fontFamily: "'Fredoka', cursive", fontSize: "1.05rem", fontWeight: 600, cursor: "pointer" }}>
+          <button type="submit" style={{ width: "100%", marginTop: "1.5rem", padding: "12px", background: "var(--primary-container)", border: "none", borderRadius: "var(--radius-md)", color: "white", fontFamily: "'DM Sans', sans-serif", fontSize: "1.05rem", fontWeight: 600, cursor: "pointer" }}>
             Sign In
           </button>
         </form>
@@ -152,8 +152,8 @@ export default function AdminPage() {
       <div style={{ background: "var(--surface)", borderBottom: "1.5px solid var(--border)", padding: "0 1.5rem" }}>
         <div style={{ maxWidth: 960, margin: "0 auto", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <ShieldCheck size={18} color="#1a3a6e" />
-            <span style={{ fontFamily: "'Fredoka', cursive", fontWeight: 700, color: "var(--text)", fontSize: "1.05rem" }}>Admin Panel</span>
+            <ShieldCheck size={18} color="var(--primary-container)" />
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "var(--text)", fontSize: "1.05rem" }}>Admin Panel</span>
           </div>
           <button onClick={() => { setAuthed(false); setAdminToken(""); }} style={{ background: "transparent", border: "1.5px solid var(--border)", borderRadius: "var(--radius-xl)", padding: "5px 14px", color: "var(--text-2)", fontSize: "0.82rem", fontWeight: 600, cursor: "pointer" }}>
             Sign out
@@ -166,19 +166,19 @@ export default function AdminPage() {
         {/* Daily word picker */}
         <div style={{ background: "var(--surface)", border: "1.5px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "1.5rem", marginBottom: "1.5rem", boxShadow: "var(--shadow-sm)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "1rem" }}>
-            <CalendarDays size={18} color="#1a3a6e" />
+            <CalendarDays size={18} color="var(--primary-container)" />
             <h2 style={{ fontSize: "1.1rem", color: "var(--text)" }}>Today's Daily Word</h2>
           </div>
 
           {todayWord ? (
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "1rem", padding: "0.75rem 1rem", background: "rgba(26,58,110,0.05)", borderRadius: "var(--radius-md)", border: "1.5px solid rgba(26,58,110,0.15)" }}>
-              <Check size={16} color="#1a3a6e" />
-              <span style={{ fontFamily: "'Fredoka', cursive", fontSize: "1.1rem", color: "#1a3a6e", fontWeight: 700 }}>{todayWord.word}</span>
+              <Check size={16} color="var(--primary-container)" />
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.1rem", color: "var(--primary-container)", fontWeight: 700 }}>{todayWord.word}</span>
               <DiffTag d={todayWord.difficulty} />
               {todayWord.hint && <span style={{ color: "var(--text-3)", fontSize: "0.82rem", fontStyle: "italic" }}>{todayWord.hint}</span>}
             </div>
           ) : (
-            <div style={{ padding: "0.75rem 1rem", background: "#fffbeb", borderRadius: "var(--radius-md)", border: "1.5px solid #fcd34d", marginBottom: "1rem", fontSize: "0.85rem", color: "#b45309" }}>
+            <div style={{ padding: "0.75rem 1rem", background: "rgba(231,193,135,0.08)", borderRadius: "var(--radius-md)", border: "1px solid rgba(231,193,135,0.3)", marginBottom: "1rem", fontSize: "0.85rem", color: "var(--secondary)" }}>
               No word set — a random hard word will be auto-selected when the first player visits today.
             </div>
           )}
@@ -204,7 +204,7 @@ export default function AdminPage() {
                   style={{ width: "100%", display: "flex", alignItems: "center", gap: "10px", padding: "0.6rem 1rem", background: "var(--surface)", border: "none", borderBottom: "1px solid var(--border-2)", cursor: "pointer", textAlign: "left" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "var(--surface2)")}
                   onMouseLeave={e => (e.currentTarget.style.background = "var(--surface)")}>
-                  <span style={{ fontFamily: "'Fredoka', cursive", fontWeight: 700, color: "var(--text)" }}>{w.word}</span>
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "var(--text)" }}>{w.word}</span>
                   <DiffTag d={w.difficulty} />
                   {w.hint && <span style={{ color: "var(--text-3)", fontSize: "0.78rem" }}>{w.hint}</span>}
                 </button>
@@ -216,7 +216,7 @@ export default function AdminPage() {
           )}
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "clamp(260px,35%,320px) 1fr", gap: "1.5rem", alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "clamp(260px,35%,320px) 1fr"} className="admin-grid" style={{display: "grid", gridTemplateColumns: "clamp(260px,35%,320px) 1fr", gap: "1.5rem", alignItems: "start" }}>
           {/* Add word panel */}
           <div>
             <form onSubmit={handleAdd} style={{ background: "var(--surface)", border: "1.5px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "1.5rem", boxShadow: "var(--shadow-sm)" }}>
@@ -240,10 +240,10 @@ export default function AdminPage() {
               </div>
 
               {addError && <p role="alert" style={{ color: "#ef5350", fontSize: "0.8rem", marginTop: "0.5rem" }}>{addError}</p>}
-              {addSuccess && <p style={{ color: "var(--sage)", fontSize: "0.8rem", marginTop: "0.5rem" }}>{addSuccess}</p>}
+              {addSuccess && <p style={{ color: "var(--success)", fontSize: "0.8rem", marginTop: "0.5rem" }}>{addSuccess}</p>}
 
               <button type="submit" disabled={adding}
-                style={{ width: "100%", marginTop: "1.25rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", padding: "11px", background: "#1a3a6e", border: "none", borderRadius: "var(--radius-md)", color: "white", fontFamily: "'Fredoka', cursive", fontSize: "1rem", fontWeight: 600, cursor: "pointer", opacity: adding ? 0.7 : 1 }}>
+                style={{ width: "100%", marginTop: "1.25rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", padding: "11px", background: "var(--primary-container)", border: "none", borderRadius: "var(--radius-md)", color: "white", fontFamily: "'DM Sans', sans-serif", fontSize: "1rem", fontWeight: 600, cursor: "pointer", opacity: adding ? 0.7 : 1 }}>
                 <Plus size={16} /> {adding ? "Adding..." : "Add Word"}
               </button>
             </form>
@@ -253,12 +253,12 @@ export default function AdminPage() {
               {["easy", "medium", "hard"].map(d => (
                 <div key={d} style={{ display: "flex", justifyContent: "space-between", padding: "4px 0" }}>
                   <span style={{ fontSize: "0.85rem", color: "var(--text-2)", textTransform: "capitalize" }}>{d}</span>
-                  <span style={{ fontFamily: "'Fredoka', cursive", fontWeight: 700, color: "var(--text)" }}>{words.filter(w => w.difficulty === d).length}</span>
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "var(--text)" }}>{words.filter(w => w.difficulty === d).length}</span>
                 </div>
               ))}
               <div style={{ borderTop: "1.5px solid var(--border-2)", paddingTop: "6px", marginTop: "4px", display: "flex", justifyContent: "space-between" }}>
                 <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-2)" }}>Total</span>
-                <span style={{ fontFamily: "'Fredoka', cursive", fontWeight: 700, color: "#1a3a6e" }}>{words.length}</span>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "var(--primary-container)" }}>{words.length}</span>
               </div>
             </div>
           </div>
@@ -271,7 +271,7 @@ export default function AdminPage() {
                 {["all", "easy", "medium", "hard"].map(d => (
                   <button key={d} onClick={() => setFilterDiff(d)}
                     style={{ padding: "5px 12px", border: "1.5px solid", borderRadius: "var(--radius-xl)", fontSize: "0.78rem", fontWeight: 700, cursor: "pointer", textTransform: "capitalize", transition: "all 0.12s",
-                      ...(filterDiff === d ? { background: "#1a3a6e", borderColor: "#1a3a6e", color: "white" } : { background: "var(--surface)", borderColor: "var(--border)", color: "var(--text-2)" }) }}>
+                      ...(filterDiff === d ? { background: "var(--primary-container)", borderColor: "var(--primary-container)", color: "white" } : { background: "var(--surface)", borderColor: "var(--border)", color: "var(--text-2)" }) }}>
                     {d}
                   </button>
                 ))}
@@ -289,7 +289,7 @@ export default function AdminPage() {
                   <div key={w.id} style={{ display: "flex", alignItems: "center", gap: "0.75rem", background: "var(--surface)", border: "1.5px solid var(--border)", borderRadius: "var(--radius-md)", padding: "0.6rem 0.875rem" }}>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
-                        <span style={{ fontFamily: "'Fredoka', cursive", fontWeight: 700, fontSize: "0.95rem", color: "var(--text)" }}>{w.word}</span>
+                        <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "var(--text)" }}>{w.word}</span>
                         <DiffTag d={w.difficulty} />
                       </div>
                       {w.hint && <p style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: "1px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{w.hint}</p>}
@@ -297,7 +297,7 @@ export default function AdminPage() {
                     <div style={{ display: "flex", gap: "4px", flexShrink: 0 }}>
                       <button onClick={() => handleSetDaily(w.id)} aria-label={`Set ${w.word} as daily`} title="Set as today's word"
                         style={{ width: 30, height: 30, display: "flex", alignItems: "center", justifyContent: "center", background: "transparent", border: "1.5px solid var(--border)", borderRadius: "var(--radius-sm)", color: "var(--text-3)", cursor: "pointer", transition: "all 0.12s" }}
-                        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#1a3a6e"; (e.currentTarget as HTMLButtonElement).style.color = "#1a3a6e"; }}
+                        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--primary-container)"; (e.currentTarget as HTMLButtonElement).style.color = "var(--primary-container)"; }}
                         onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--border)"; (e.currentTarget as HTMLButtonElement).style.color = "var(--text-3)"; }}>
                         <CalendarDays size={13} />
                       </button>
@@ -323,7 +323,7 @@ function DiffTag({ d }: { d: string }) {
   return <span style={{ fontSize: "0.68rem", fontWeight: 700, background: diffBg(d), color: diffText(d), border: `1px solid ${diffBorder(d)}`, borderRadius: 99, padding: "1px 7px", textTransform: "capitalize" }}>{d}</span>;
 }
 const labelStyle: React.CSSProperties = { display: "block", fontSize: "0.8rem", fontWeight: 700, color: "var(--text-2)", marginBottom: "4px" };
-const inputStyle = (err: boolean): React.CSSProperties => ({ width: "100%", padding: "9px 13px", border: `1.5px solid ${err ? "#ef5350" : "var(--border)"}`, borderRadius: "var(--radius-md)", fontSize: "0.9rem", background: "var(--surface2)", color: "var(--text)" });
+const inputStyle = (err: boolean): React.CSSProperties => ({ width: "100%", padding: "9px 13px", border: `1.5px solid ${err ? "#ef5350" : "var(--border)"}`, borderRadius: "var(--radius-md)", fontSize: "0.9rem", background: "var(--surface-high)", color: "var(--text)" });
 function diffBg(d: string) { return d === "easy" ? "#f0fff4" : d === "medium" ? "#fffbeb" : "#fff5f5"; }
 function diffText(d: string) { return d === "easy" ? "#2d9f6a" : d === "medium" ? "#b45309" : "#c53030"; }
 function diffBorder(d: string) { return d === "easy" ? "#9bdfbc" : d === "medium" ? "#fcd34d" : "#fca5a5"; }
