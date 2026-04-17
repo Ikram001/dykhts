@@ -216,7 +216,7 @@ export default function AdminPage() {
           )}
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "clamp(260px,35%,320px) 1fr"} className="admin-grid" style={{display: "grid", gridTemplateColumns: "clamp(260px,35%,320px) 1fr", gap: "1.5rem", alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "clamp(260px,35%,320px) 1fr", gap: "1.5rem", alignItems: "start" }}>
           {/* Add word panel */}
           <div>
             <form onSubmit={handleAdd} style={{ background: "var(--surface)", border: "1.5px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "1.5rem", boxShadow: "var(--shadow-sm)" }}>
