@@ -130,8 +130,8 @@ export default function DailyPage() {
                   style={{ display: "flex", alignItems: "center", gap: "6px", background: "var(--primary-container)", border: "none", borderRadius: "var(--radius-md)", padding: "8px 18px", color: "white", fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem", fontWeight: 600, cursor: "pointer" }}>
                   <Volume2 size={14} /> Listen
                 </button>
-                <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                  <DiffBadge d={daily.word.difficulty} />
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <span style={{ fontSize: "0.72rem", color: "var(--text-3)" }}>{daily.word.length} letters</span>
                   <TriesDots used={phase === "playing" ? currentAttempt : (savedEntry?.attemptsUsed ?? maxTries)} max={maxTries} />
                 </div>
               </div>
@@ -198,25 +198,14 @@ export default function DailyPage() {
 
             {/* Remaining attempts bar */}
             {phase === "playing" && (
-              <div style={{ padding: "0.625rem 1rem", fontSize: "0.78rem", color: "var(--text-3)", display: "flex", justifyContent: "space-between" }}>
+              <div style={{ padding: "0.625rem 1rem", fontSize: "0.78rem", color: "var(--text-3)" }}>
                 <span>{maxTries - currentAttempt} {maxTries - currentAttempt === 1 ? "attempt" : "attempts"} left</span>
-                {daily.word.difficulty === "hard" && <span style={{ color: "var(--error)", fontSize: "0.72rem" }}>Hard word</span>}
               </div>
             )}
           </div>
         )}
       </main>
     </>
-  );
-}
-
-function DiffBadge({ d }: { d: string }) {
-  const colors: Record<string, string> = { easy: "var(--success)", medium: "var(--secondary)", hard: "var(--error)" };
-  const color = colors[d] ?? "var(--text-3)";
-  return (
-    <span style={{ fontSize: "0.68rem", fontWeight: 600, color, background: `${color}18`, border: `1px solid ${color}30`, borderRadius: "var(--radius-xl)", padding: "2px 10px", textTransform: "capitalize", letterSpacing: "0.04em" }}>
-      {d}
-    </span>
   );
 }
 

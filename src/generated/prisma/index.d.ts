@@ -2463,18 +2463,21 @@ export namespace Prisma {
   export type PlayerMinAggregateOutputType = {
     id: number | null
     name: string | null
+    code: string | null
     createdAt: Date | null
   }
 
   export type PlayerMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    code: string | null
     createdAt: Date | null
   }
 
   export type PlayerCountAggregateOutputType = {
     id: number
     name: number
+    code: number
     createdAt: number
     _all: number
   }
@@ -2491,18 +2494,21 @@ export namespace Prisma {
   export type PlayerMinAggregateInputType = {
     id?: true
     name?: true
+    code?: true
     createdAt?: true
   }
 
   export type PlayerMaxAggregateInputType = {
     id?: true
     name?: true
+    code?: true
     createdAt?: true
   }
 
   export type PlayerCountAggregateInputType = {
     id?: true
     name?: true
+    code?: true
     createdAt?: true
     _all?: true
   }
@@ -2596,6 +2602,7 @@ export namespace Prisma {
   export type PlayerGroupByOutputType = {
     id: number
     name: string
+    code: string
     createdAt: Date
     _count: PlayerCountAggregateOutputType | null
     _avg: PlayerAvgAggregateOutputType | null
@@ -2621,6 +2628,7 @@ export namespace Prisma {
   export type PlayerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    code?: boolean
     createdAt?: boolean
     dailyEntries?: boolean | Player$dailyEntriesArgs<ExtArgs>
     arcadeScores?: boolean | Player$arcadeScoresArgs<ExtArgs>
@@ -2630,22 +2638,25 @@ export namespace Prisma {
   export type PlayerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    code?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["player"]>
 
   export type PlayerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    code?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["player"]>
 
   export type PlayerSelectScalar = {
     id?: boolean
     name?: boolean
+    code?: boolean
     createdAt?: boolean
   }
 
-  export type PlayerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt", ExtArgs["result"]["player"]>
+  export type PlayerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "code" | "createdAt", ExtArgs["result"]["player"]>
   export type PlayerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     dailyEntries?: boolean | Player$dailyEntriesArgs<ExtArgs>
     arcadeScores?: boolean | Player$arcadeScoresArgs<ExtArgs>
@@ -2663,6 +2674,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
+      code: string
       createdAt: Date
     }, ExtArgs["result"]["player"]>
     composites: {}
@@ -3091,6 +3103,7 @@ export namespace Prisma {
   interface PlayerFieldRefs {
     readonly id: FieldRef<"Player", 'Int'>
     readonly name: FieldRef<"Player", 'String'>
+    readonly code: FieldRef<"Player", 'String'>
     readonly createdAt: FieldRef<"Player", 'DateTime'>
   }
     
@@ -6949,6 +6962,7 @@ export namespace Prisma {
   export const PlayerScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    code: 'code',
     createdAt: 'createdAt'
   };
 
@@ -7147,6 +7161,7 @@ export namespace Prisma {
     NOT?: PlayerWhereInput | PlayerWhereInput[]
     id?: IntFilter<"Player"> | number
     name?: StringFilter<"Player"> | string
+    code?: StringFilter<"Player"> | string
     createdAt?: DateTimeFilter<"Player"> | Date | string
     dailyEntries?: DailyEntryListRelationFilter
     arcadeScores?: ArcadeScoreListRelationFilter
@@ -7155,6 +7170,7 @@ export namespace Prisma {
   export type PlayerOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    code?: SortOrder
     createdAt?: SortOrder
     dailyEntries?: DailyEntryOrderByRelationAggregateInput
     arcadeScores?: ArcadeScoreOrderByRelationAggregateInput
@@ -7162,18 +7178,20 @@ export namespace Prisma {
 
   export type PlayerWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    name?: string
+    code?: string
     AND?: PlayerWhereInput | PlayerWhereInput[]
     OR?: PlayerWhereInput[]
     NOT?: PlayerWhereInput | PlayerWhereInput[]
+    name?: StringFilter<"Player"> | string
     createdAt?: DateTimeFilter<"Player"> | Date | string
     dailyEntries?: DailyEntryListRelationFilter
     arcadeScores?: ArcadeScoreListRelationFilter
-  }, "id" | "name">
+  }, "id" | "code">
 
   export type PlayerOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    code?: SortOrder
     createdAt?: SortOrder
     _count?: PlayerCountOrderByAggregateInput
     _avg?: PlayerAvgOrderByAggregateInput
@@ -7188,6 +7206,7 @@ export namespace Prisma {
     NOT?: PlayerScalarWhereWithAggregatesInput | PlayerScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Player"> | number
     name?: StringWithAggregatesFilter<"Player"> | string
+    code?: StringWithAggregatesFilter<"Player"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Player"> | Date | string
   }
 
@@ -7433,6 +7452,7 @@ export namespace Prisma {
 
   export type PlayerCreateInput = {
     name: string
+    code: string
     createdAt?: Date | string
     dailyEntries?: DailyEntryCreateNestedManyWithoutPlayerInput
     arcadeScores?: ArcadeScoreCreateNestedManyWithoutPlayerInput
@@ -7441,6 +7461,7 @@ export namespace Prisma {
   export type PlayerUncheckedCreateInput = {
     id?: number
     name: string
+    code: string
     createdAt?: Date | string
     dailyEntries?: DailyEntryUncheckedCreateNestedManyWithoutPlayerInput
     arcadeScores?: ArcadeScoreUncheckedCreateNestedManyWithoutPlayerInput
@@ -7448,6 +7469,7 @@ export namespace Prisma {
 
   export type PlayerUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyEntries?: DailyEntryUpdateManyWithoutPlayerNestedInput
     arcadeScores?: ArcadeScoreUpdateManyWithoutPlayerNestedInput
@@ -7456,6 +7478,7 @@ export namespace Prisma {
   export type PlayerUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyEntries?: DailyEntryUncheckedUpdateManyWithoutPlayerNestedInput
     arcadeScores?: ArcadeScoreUncheckedUpdateManyWithoutPlayerNestedInput
@@ -7464,17 +7487,20 @@ export namespace Prisma {
   export type PlayerCreateManyInput = {
     id?: number
     name: string
+    code: string
     createdAt?: Date | string
   }
 
   export type PlayerUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PlayerUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -7832,6 +7858,7 @@ export namespace Prisma {
   export type PlayerCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    code?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -7842,12 +7869,14 @@ export namespace Prisma {
   export type PlayerMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    code?: SortOrder
     createdAt?: SortOrder
   }
 
   export type PlayerMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    code?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -8646,6 +8675,7 @@ export namespace Prisma {
 
   export type PlayerCreateWithoutDailyEntriesInput = {
     name: string
+    code: string
     createdAt?: Date | string
     arcadeScores?: ArcadeScoreCreateNestedManyWithoutPlayerInput
   }
@@ -8653,6 +8683,7 @@ export namespace Prisma {
   export type PlayerUncheckedCreateWithoutDailyEntriesInput = {
     id?: number
     name: string
+    code: string
     createdAt?: Date | string
     arcadeScores?: ArcadeScoreUncheckedCreateNestedManyWithoutPlayerInput
   }
@@ -8691,6 +8722,7 @@ export namespace Prisma {
 
   export type PlayerUpdateWithoutDailyEntriesInput = {
     name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     arcadeScores?: ArcadeScoreUpdateManyWithoutPlayerNestedInput
   }
@@ -8698,6 +8730,7 @@ export namespace Prisma {
   export type PlayerUncheckedUpdateWithoutDailyEntriesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     arcadeScores?: ArcadeScoreUncheckedUpdateManyWithoutPlayerNestedInput
   }
@@ -8726,6 +8759,7 @@ export namespace Prisma {
 
   export type PlayerCreateWithoutArcadeScoresInput = {
     name: string
+    code: string
     createdAt?: Date | string
     dailyEntries?: DailyEntryCreateNestedManyWithoutPlayerInput
   }
@@ -8733,6 +8767,7 @@ export namespace Prisma {
   export type PlayerUncheckedCreateWithoutArcadeScoresInput = {
     id?: number
     name: string
+    code: string
     createdAt?: Date | string
     dailyEntries?: DailyEntryUncheckedCreateNestedManyWithoutPlayerInput
   }
@@ -8755,6 +8790,7 @@ export namespace Prisma {
 
   export type PlayerUpdateWithoutArcadeScoresInput = {
     name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyEntries?: DailyEntryUpdateManyWithoutPlayerNestedInput
   }
@@ -8762,6 +8798,7 @@ export namespace Prisma {
   export type PlayerUncheckedUpdateWithoutArcadeScoresInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyEntries?: DailyEntryUncheckedUpdateManyWithoutPlayerNestedInput
   }

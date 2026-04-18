@@ -131,6 +131,7 @@ exports.Prisma.WordScalarFieldEnum = {
 exports.Prisma.PlayerScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  code: 'code',
   createdAt: 'createdAt'
 };
 

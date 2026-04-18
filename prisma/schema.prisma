@@ -19,7 +19,8 @@ model Word {
 
 model Player {
   id        Int      @id @default(autoincrement())
-  name      String   @unique
+  name      String
+  code      String   @unique  // random 6-char code — the real identity key
   createdAt DateTime @default(now())
 
   dailyEntries DailyEntry[]

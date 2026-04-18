@@ -36,7 +36,7 @@ export default function Navbar() {
         <div style={{ maxWidth: 680, margin: "0 auto", padding: "0 1rem", display: "flex", alignItems: "center", justifyContent: "space-between", height: 52 }}>
           {/* Logo */}
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <Image src="/logo.png" alt="Spelldle" width={26} height={26} style={{ objectFit: "contain" }} priority />
+            <Image src="/logo.png" alt="Spelldle" width={30} height={30} style={{ objectFit: "contain" }} priority />
             <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: "0.95rem", color: "var(--text)", letterSpacing: "-0.02em" }}>
               Spelldle
             </span>
