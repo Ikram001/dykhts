@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { Volume2, RefreshCw, ChevronRight } from "lucide-react";
+import { Volume2, RefreshCw, Trophy } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import PlayerModal from "@/components/PlayerModal";
 import SpellBoard from "@/components/SpellBoard";
@@ -270,10 +270,10 @@ export default function PracticePage() {
                     style={{ display: "flex", alignItems: "center", gap: "5px", background: "var(--primary-container)", border: "none", borderRadius: "var(--radius-md)", padding: "9px 20px", color: "white", fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem", fontWeight: 600, cursor: "pointer" }}>
                     <RefreshCw size={13} /> New Word
                   </button>
-                  <button onClick={() => fetchWord(difficulty)}
-                    style={{ display: "flex", alignItems: "center", gap: "5px", background: "transparent", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "9px 20px", color: "var(--text-2)", fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem", fontWeight: 500, cursor: "pointer" }}>
-                    Skip <ChevronRight size={13} />
-                  </button>
+                  <a href="/leaderboard"
+                    style={{ display: "inline-flex", alignItems: "center", gap: "5px", background: "transparent", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "9px 20px", color: "var(--text-2)", fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem", fontWeight: 500, cursor: "pointer", textDecoration: "none" }}>
+                    <Trophy size={13} /> View Leaderboard
+                  </a>
                 </div>
               </div>
             )}

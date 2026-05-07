@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { Volume2, Flame, CheckCircle2, XCircle, Eye } from "lucide-react";
+import { Volume2, Flame, CheckCircle2, XCircle, Eye, Trophy, Gamepad2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import PlayerModal from "@/components/PlayerModal";
 import SpellBoard from "@/components/SpellBoard";
@@ -186,12 +186,23 @@ export default function DailyPage() {
                   )}
 
                   {savedEntry && (
-                    <div style={{ display: "flex", gap: "0.5rem", justifyContent: "center", flexWrap: "wrap", marginTop: "0.25rem" }}>
+                    <div style={{ display: "flex", gap: "0.5rem", justifyContent: "center", flexWrap: "wrap", marginTop: "0.25rem", marginBottom: "1.25rem" }}>
                       {savedEntry.won && savedEntry.firstTry && <Chip label="First try" icon={<CheckCircle2 size={11} />} color="var(--success)" />}
                       {savedEntry.streak > 1 && <Chip label={`${savedEntry.streak} day streak`} icon={<Flame size={11} />} color="var(--secondary)" />}
                       <Chip label={`${savedEntry.attemptsUsed} ${savedEntry.attemptsUsed === 1 ? "attempt" : "attempts"}`} color="var(--text-3)" />
                     </div>
                   )}
+
+                  <div style={{ display: "flex", gap: "8px", justifyContent: "center", flexWrap: "wrap" }}>
+                    <a href="/leaderboard"
+                      style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "var(--primary-container)", border: "none", borderRadius: "var(--radius-md)", padding: "10px 20px", color: "white", fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem", fontWeight: 600, cursor: "pointer", textDecoration: "none" }}>
+                      <Trophy size={14} /> View Leaderboard
+                    </a>
+                    <a href="/practice"
+                      style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "transparent", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "10px 20px", color: "var(--text-2)", fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem", fontWeight: 500, cursor: "pointer", textDecoration: "none" }}>
+                      <Gamepad2 size={14} /> Practice More
+                    </a>
+                  </div>
                 </div>
               )}
             </div>
